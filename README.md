@@ -1,4 +1,4 @@
-# Systemic Insolence: a personal site
+# Systemic Insolence: A Personal Site
 
 A small personal site (writing, photographs, books, projects) built with **Ruby on
 Rails 8 used as a static-site generator** and published on **GitHub Pages**.
