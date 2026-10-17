@@ -1,0 +1,42 @@
+# Checks every pull request and every push: tests, style, security scan, and a
+# full trial build of the site (nothing is published).
+name: Checks
+
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    env:
+      CI: "true"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - name: Install ImageMagick
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends imagemagick
+
+      - name: Tests
+        run: bin/rails test && ruby test/static_site/static_site_test.rb
+
+      - name: Content and media checks
+        run: bin/rails content:lint media:check
+
+      - name: Security scan (Brakeman)
+        run: bin/brakeman --no-pager
+
+      - name: Style (RuboCop)
+        run: bin/rubocop
+
+      - name: Trial build
+        env:
+          RAILS_ENV: production
+          STATIC_REQUIRE_IMAGEMAGICK: "1"
+        run: bin/rails static:build

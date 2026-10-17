@@ -1,0 +1,14 @@
+<footer class="site-footer">
+  <div class="wrap site-footer__inner">
+    <p>&copy; <%= Date.current.year %> <%= site.name %></p>
+    <p class="site-footer__links">
+      <a href="/feed.xml">Feed</a>
+      <% if Page.find("about-this-site") %>
+        <a href="/about-this-site">About this site</a>
+      <% end %>
+      <% if show_email? %>
+        <%= mail_to site.email, "Email" %>
+      <% end %>
+    </p>
+  </div>
+</footer>

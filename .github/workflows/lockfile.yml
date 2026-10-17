@@ -1,0 +1,26 @@
+# One-time helper: creates Gemfile.lock so every build uses exactly the same
+# gem versions. Run it from the Actions tab ("Run workflow"), download the
+# "Gemfile.lock" file from the finished run, and commit it to the repository.
+# Re-run it whenever you change the Gemfile by hand (Dependabot does it for you).
+name: Make Gemfile.lock
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lock:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: false
+      - run: |
+          bundle lock --add-platform x86_64-linux arm64-darwin x86_64-darwin
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Gemfile.lock
+          path: Gemfile.lock

@@ -1,0 +1,26 @@
+/.bundle
+/vendor/bundle
+
+# Build output and sync results (rebuilt by the deploy workflow)
+/_site
+/tmp/*
+!/tmp/.keep
+/log/*
+!/log/.keep
+/public/media/synced/
+
+# Local backup of the original starter, if present
+/.original-snapshot.tgz
+
+# Secrets: never commit these
+.env
+.env.*
+!.env.example
+/config/master.key
+/config/credentials/*.key
+
+.DS_Store
+/node_modules
+
+# Old version of the starter, kept only until you delete it
+/_old-version/

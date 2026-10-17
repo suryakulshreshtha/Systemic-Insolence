@@ -1,0 +1,9 @@
+<article class="article">
+  <header class="page-header">
+    <p class="eyebrow"><a href="<%= project_path(@project.slug) %>"><%= @project.name %></a></p>
+    <h1 class="page-title">Privacy</h1>
+  </header>
+  <div class="prose">
+    <%= @project.privacy_html %>
+  </div>
+</article>

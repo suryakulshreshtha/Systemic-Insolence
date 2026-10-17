@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+require "fileutils"
+
+APP_ROOT = File.expand_path("..", __dir__)
+
+def run(command)
+  puts "\n== #{command} =="
+  system(command) || abort("\nFailed: #{command}")
+end
+
+FileUtils.chdir(APP_ROOT) do
+  run "bundle install"
+  puts "\nReady."
+  puts "  Preview while writing:   bin/dev            (http://localhost:3000)"
+  puts "  Build the real site:     RAILS_ENV=production bin/rails static:build"
+  puts "  Look at the built site:  bin/rails static:serve   (http://localhost:8080)"
+  puts "\nEverything is explained in UPDATING.md."
+end

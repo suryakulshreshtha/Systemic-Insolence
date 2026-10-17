@@ -1,0 +1,11 @@
+<article class="article">
+  <header class="page-header">
+    <h1 class="page-title"><%= @page.title %></h1>
+    <% if @page.updated_on.present? %>
+      <p class="eyebrow">Updated <%= long_date(@page.updated_on) %></p>
+    <% end %>
+  </header>
+  <div class="prose">
+    <%= @page.body_html %>
+  </div>
+</article>

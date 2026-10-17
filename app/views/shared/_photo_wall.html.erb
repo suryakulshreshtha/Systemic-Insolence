@@ -1,0 +1,18 @@
+<ul class="photo-wall">
+  <% photos.each do |photo| %>
+    <li class="photo">
+      <a class="photo__link" href="<%= photo['url'] %>"<%= raw ' rel="noopener noreferrer"' if StaticSite::SafeUrl.web?(photo['url']) %>>
+        <%= image_tag_for(photo["thumb_url"] || photo["image_url"], alt: photo["alt"], class: "photo__img") %>
+      </a>
+      <p class="photo__meta">
+        <span class="photo__frame">FRAME <%= photo["frame"] %></span>
+        <% if photo["taken_on"].present? %>
+          <time datetime="<%= photo['taken_on'] %>"><%= photo["taken_on"] %></time>
+        <% end %>
+      </p>
+      <% if photo["caption"].present? %>
+        <p class="photo__caption"><%= photo["caption"] %></p>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

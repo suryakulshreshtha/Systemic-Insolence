@@ -1,0 +1,44 @@
+<article class="article">
+  <header class="page-header">
+    <p class="eyebrow"><%= @project.name %></p>
+    <h1 class="page-title"><%= @project.headline %></h1>
+    <% if @project.subhead.present? %>
+      <p class="lede"><%= @project.subhead %></p>
+    <% end %>
+    <% if @project.links.any? %>
+      <p class="button-row">
+        <% @project.links.each do |link| %>
+          <%= external_link_to(link["label"], link["url"], class: "button") %>
+        <% end %>
+      </p>
+    <% end %>
+  </header>
+
+  <% if @project.screenshots.any? %>
+    <ul class="shots">
+      <% @project.screenshots.each do |shot| %>
+        <li><%= image_tag_for(shot["src"], alt: shot["alt"], class: "shots__img") %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <% if @project.features.any? %>
+    <ul class="features">
+      <% @project.features.each do |feature| %>
+        <li>
+          <h2 class="features__title"><%= feature["title"] %></h2>
+          <p><%= feature["body"] %></p>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <% if @project.footer_note.present? || @project.privacy_html %>
+    <p class="muted project-footer">
+      <%= @project.footer_note %>
+      <% if @project.privacy_html %>
+        <a href="<%= project_privacy_path(@project.slug) %>">Privacy</a>
+      <% end %>
+    </p>
+  <% end %>
+</article>

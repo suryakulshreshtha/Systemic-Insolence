@@ -1,0 +1,13 @@
+<header class="site-header">
+  <div class="wrap site-header__inner">
+    <a class="site-name" href="/"><%= site.name %></a>
+    <nav class="site-nav" aria-label="Main">
+      <% nav_items.each do |label, path| %>
+        <%= nav_link(label, path) %>
+      <% end %>
+    </nav>
+    <button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Switch between dark and light theme">
+      <span aria-hidden="true">◐</span>
+    </button>
+  </div>
+</header>

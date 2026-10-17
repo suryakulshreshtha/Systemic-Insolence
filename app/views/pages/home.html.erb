@@ -1,0 +1,85 @@
+<section class="hero">
+  <img class="hero__avatar" src="<%= safe_url(site.avatar) %>" alt="" width="96" height="96">
+  <div class="hero__text">
+    <h1 class="hero__name"><%= site.name %></h1>
+    <p class="hero__tagline"><%= tagline_html %></p>
+    <% if @about %>
+      <div class="prose hero__intro">
+        <%= first_paragraph_html(@about.body_markdown) %>
+        <p><a href="/about">More about me →</a></p>
+      </div>
+    <% end %>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="writing-heading">
+  <h2 class="section__label" id="writing-heading">Writing</h2>
+  <div class="section__body">
+    <% if @posts.any? %>
+      <ul class="post-list">
+        <% @posts.each do |post| %>
+          <li>
+            <time class="post-list__date" datetime="<%= iso_date(post.date) %>"><%= short_date(post.date) %></time>
+            <a class="post-list__title" href="<%= post_path(post.slug) %>"><%= post.title %></a>
+          </li>
+        <% end %>
+      </ul>
+      <p class="more"><a href="/blog">All posts →</a></p>
+    <% else %>
+      <p class="muted">Nothing published yet.</p>
+    <% end %>
+  </div>
+</section>
+
+<% if @projects.any? %>
+  <section class="section" aria-labelledby="projects-heading">
+    <h2 class="section__label" id="projects-heading">Projects</h2>
+    <div class="section__body">
+      <ul class="project-list">
+        <% @projects.each do |project| %>
+          <li class="project-card">
+            <a class="project-card__name" href="<%= project_path(project.slug) %>"><%= project.name %></a>
+            <p class="project-card__blurb"><%= project.blurb %></p>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </section>
+<% end %>
+
+<% if @books.any? %>
+  <section class="section" aria-labelledby="books-heading">
+    <h2 class="section__label" id="books-heading">Bookshelf</h2>
+    <div class="section__body">
+      <%= render "shared/book_row", books: @books %>
+      <p class="more"><a href="/bookshelf">The whole shelf →</a></p>
+    </div>
+  </section>
+<% end %>
+
+<% if @photos.any? %>
+  <section class="section" aria-labelledby="photos-heading">
+    <h2 class="section__label" id="photos-heading">Photography</h2>
+    <div class="section__body">
+      <% if site.photo_feed_label.present? %>
+        <p class="muted"><%= site.photo_feed_label %></p>
+      <% end %>
+      <%= render "shared/photo_wall", photos: @photos %>
+      <p class="more"><a href="/photos">All photographs →</a></p>
+    </div>
+  </section>
+<% end %>
+
+<% elsewhere = Array(site.elsewhere).select { |link| link.is_a?(Hash) && safe_url(link["url"], allow_mail: true) } %>
+<% if elsewhere.any? %>
+  <section class="section" aria-labelledby="elsewhere-heading">
+    <h2 class="section__label" id="elsewhere-heading">Elsewhere</h2>
+    <div class="section__body">
+      <ul class="plain-list">
+        <% elsewhere.each do |link| %>
+          <li><%= external_link_to(link["label"], link["url"]) %></li>
+        <% end %>
+      </ul>
+    </div>
+  </section>
+<% end %>

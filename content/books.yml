@@ -1,0 +1,23 @@
+# Books for the Bookshelf page and the home page.
+#
+# Add a book by copying one of the example lines (remove the leading "#").
+# Everything except "title" is optional. If you also connect Goodreads in
+# config/site.yml, books listed here win over the Goodreads copy of the same title.
+#
+#   cover:   a file you added to public/media/books/  (/media/books/dune.jpg)
+#            or a full https:// address
+#   rating:  1 to 5
+#   finished: the day you finished it, as YYYY-MM-DD (used for ordering)
+
+currently_reading: []
+#  - title: "Example Book"
+#    author: "Example Author"
+#    url: "https://example.com/book"
+#    cover: "/media/books/example-book.jpg"
+
+read: []
+#  - title: "Another Example"
+#    author: "Someone Else"
+#    rating: 4
+#    finished: 2026-09-30
+#    cover: "/media/books/another-example.jpg"

@@ -1,0 +1,46 @@
+<article class="article">
+  <header class="page-header">
+    <p class="eyebrow">
+      <time datetime="<%= iso_date(@post.date) %>"><%= long_date(@post.date) %></time>
+      <span aria-hidden="true">·</span>
+      <%= reading_time(@post) %>
+    </p>
+    <h1 class="page-title"><%= @post.title %></h1>
+    <% if @post.tags.any? %>
+      <ul class="tags">
+        <% @post.tags.each do |tag_name| %>
+          <li><%= tag_name %></li>
+        <% end %>
+      </ul>
+    <% end %>
+  </header>
+
+  <div class="prose">
+    <%= @post.body_html %>
+  </div>
+
+  <nav class="post-nav" aria-label="More posts">
+    <% if @newer %>
+      <a class="post-nav__newer" href="<%= post_path(@newer.slug) %>">
+        <span class="eyebrow">Newer</span>
+        <%= @newer.title %>
+      </a>
+    <% end %>
+    <% if @older %>
+      <a class="post-nav__older" href="<%= post_path(@older.slug) %>">
+        <span class="eyebrow">Older</span>
+        <%= @older.title %>
+      </a>
+    <% end %>
+  </nav>
+</article>
+
+<script type="application/ld+json"><%= json_ld(
+  "@context" => "https://schema.org",
+  "@type" => "BlogPosting",
+  "headline" => @post.title,
+  "datePublished" => iso_date(@post.date),
+  "description" => @post.summary,
+  "mainEntityOfPage" => absolute_url(post_path(@post.slug)),
+  "author" => { "@type" => "Person", "name" => site.name }
+) %></script>

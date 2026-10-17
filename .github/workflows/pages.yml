@@ -1,0 +1,84 @@
+# Builds the site and publishes it to GitHub Pages.
+#
+# Runs when you push to main, every 6 hours (so Goodreads / Drive / photo-feed
+# changes and posts dated in the future appear on their own), and on demand
+# from the Actions tab ("Run workflow").
+name: Publish site
+
+on:
+  push:
+    branches: [ main ]
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+
+# Only what publishing needs. Nothing can write to the repository.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One publish at a time; a newer push replaces one still waiting.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Install ImageMagick (strips photo metadata, makes thumbnails)
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends imagemagick
+
+      # Where the site is served from: your github.io address now, your own
+      # domain once you connect it in Settings -> Pages.
+      - id: pages
+        uses: actions/configure-pages@v5
+
+      # Keeps the last good Goodreads / Drive data if a service is down.
+      - uses: actions/cache@v4
+        with:
+          path: |
+            tmp/sync
+            public/media/synced
+          key: sync-${{ github.run_id }}
+          restore-keys: sync-
+
+      - name: Pull in books and photos from outside services
+        env:
+          RAILS_ENV: production
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+        run: bin/rails sync:all
+
+      - name: Check content and media (stops the publish if a file is broken)
+        env:
+          RAILS_ENV: production
+        run: bin/rails content:lint media:check
+
+      - name: Build the site
+        env:
+          RAILS_ENV: production
+          STATIC_REQUIRE_IMAGEMAGICK: "1"
+          SITE_HOST: ${{ steps.pages.outputs.host }}
+          SITE_BASE_PATH: ${{ steps.pages.outputs.base_path }}
+        run: bin/rails static:build
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

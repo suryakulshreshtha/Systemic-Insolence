@@ -1,0 +1,19 @@
+# Optional details for photos. A photo shows up on the site as soon as its
+# image file is in public/media/photos/, with or without an entry here. Add an
+# entry only to give it a caption, a date, alt text for screen readers, or a link.
+#
+# Without an entry: the date comes from a YYYY-MM-DD- prefix on the file name,
+# and the caption from the rest of the name
+# (2026-10-09-morning-light.jpg  ->  "Morning light").
+#
+#   file:    the file name only, exactly as it is in public/media/photos/
+#   caption: a short line shown under the photo
+#   alt:     describes the photo for people who cannot see it
+#   date:    YYYY-MM-DD
+#   link:    where clicking the photo goes (default: the full-size image)
+
+[]
+# - file: 2026-10-09-morning-light.jpg
+#   caption: "Morning light on the balcony"
+#   alt: "Sunlight across a wooden floor"
+#   date: 2026-10-09

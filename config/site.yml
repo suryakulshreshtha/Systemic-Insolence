@@ -1,0 +1,55 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Everything about you lives here. Edit this file, commit, push: the site
+# rebuilds and publishes itself. See UPDATING.md for the full guide.
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Who you are ------------------------------------------------------------------
+name: "Surya Kulshreshtha"          # TODO: confirm how you want your name shown
+tagline: "A personal site: notes, projects and photographs."   # TODO: write your own line
+tagline_highlight: ""                # optional: a phrase from the tagline to highlight
+description: "The personal site of Surya Kulshreshtha."
+avatar: "/images/avatar.svg"         # a file in public/images/ (square, ~480px, WebP/JPEG/PNG)
+language: "en"
+
+# Where the site lives ---------------------------------------------------------
+# You normally never change these three. The deploy workflow fills them in from
+# GitHub Pages (your github.io address now, your own domain once you connect
+# it). They only matter for canonical links, the sitemap and the feed.
+host: "suryakulshreshtha.github.io"
+protocol: "https"
+base_path: ""
+
+# Share previews ---------------------------------------------------------------
+# A PNG or JPEG (about 1200x630) in public/images/. Leave blank until you have
+# one: link previews then show text only instead of a broken image.
+social_image: ""
+
+# Contact and links --------------------------------------------------------------
+email: ""                            # optional, shown in the footer when set
+elsewhere:                           # the "Elsewhere" list on the home page
+  - label: "GitHub"
+    url: "https://github.com/suryakulshreshtha"
+
+# What shows on the home page ----------------------------------------------------
+posts_on_home: 5
+books_on_home: 6
+photos_on_home: 24
+photo_feed_label: "Everyday photography."
+
+# Optional data sources, pulled at build time ----------------------------------
+# Books and photos can also be added by hand, with no accounts needed: see
+# content/books.yml and content/photos.yml. Anything below is merged with those.
+
+# Goodreads: your numeric user id from goodreads.com/user/show/<ID>-your-name
+goodreads_user_id: ""
+goodreads_shelves:
+  currently_reading: "currently-reading"
+  read: "read"
+
+# Any RSS/Atom photo feed (Glass, Pixelfed, Micro.blog ...).
+photo_feed_url: ""
+
+# Public Google Drive folders. Paste the folder id (the last part of the folder
+# link). The folder must be shared as "Anyone with the link: Viewer", and the
+# repository needs a GOOGLE_API_KEY secret. See UPDATING.md, section 6.
+drive_photo_folders: []

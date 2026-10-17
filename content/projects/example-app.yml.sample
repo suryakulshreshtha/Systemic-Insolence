@@ -1,0 +1,47 @@
+# A side-project landing page, described in one file. Copy this to a name ending in .yml
+# (for example my-app.yml), edit it, and
+# the page exists at /projects/<filename>. No code, no route to add.
+
+name: "Example"
+headline: "Read it later. Read it better."
+subhead: "A minimal, offline read-it-later app. Save an article with one tap, read it anywhere, nothing in the way."
+description: "Example is a minimal, offline read-it-later app. Save articles with a tap and read them anywhere, distraction-free."
+
+links:
+  - label: "Download"
+    url: "https://example.com/download"
+  - label: "GitHub"
+    url: "https://github.com/yourhandle/example"
+
+# Put image files in public/media/projects/ and reference them as /media/projects/<file>.
+# The build fails if a listed file is missing.
+screenshots: []
+#   - src: "/media/projects/example/shot-1.webp"
+#     alt: "Reading list"
+
+features:
+  - title: "Quick save"
+    body: "Save by URL or from the share sheet. One tap and it's yours."
+  - title: "Works offline"
+    body: "Everything saved is on the device. No connection needed to read."
+  - title: "Clean reader"
+    body: "Just the article, set in a typeface you can read for an hour."
+  - title: "Open source"
+    body: "MIT licensed. Fork it, read it, or send a patch."
+
+footer_note: "A minimal read-it-later app"
+
+# Optional. If present, a /projects/example-app/privacy page is generated.
+privacy: |
+  ## Privacy
+
+  Example collects nothing. There is no account, no analytics, and no server
+  that belongs to us.
+
+  Articles you save are stored on your device. When you save a link, your
+  device fetches that page directly from the site that hosts it, exactly as
+  your browser would.
+
+  ### Questions
+
+  Email hello@example.com.

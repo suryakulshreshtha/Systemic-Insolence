@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="<%= site.language %>">
+  <head>
+    <%= render "shared/head" %>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <%= render "shared/header" %>
+    <main id="main" class="wrap">
+      <%= yield %>
+    </main>
+    <%= render "shared/footer" %>
+  </body>
+</html>

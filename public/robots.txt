@@ -1,0 +1,3 @@
+# Regenerated with the correct sitemap address on every build.
+User-agent: *
+Allow: /

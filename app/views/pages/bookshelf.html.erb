@@ -1,0 +1,39 @@
+<header class="page-header">
+  <h1 class="page-title">Bookshelf</h1>
+  <% if Bookshelf.profile_url %>
+    <p class="muted"><%= external_link_to("Also on Goodreads", Bookshelf.profile_url) %></p>
+  <% end %>
+</header>
+
+<% if @currently_reading.any? %>
+  <section class="section" aria-labelledby="reading-heading">
+    <h2 class="section__label" id="reading-heading">Reading now</h2>
+    <div class="section__body"><%= render "shared/book_row", books: @currently_reading %></div>
+  </section>
+<% end %>
+
+<% if @read.any? %>
+  <section class="section" aria-labelledby="read-heading">
+    <h2 class="section__label" id="read-heading">Read</h2>
+    <div class="section__body">
+      <ul class="read-list">
+        <% @read.each do |book| %>
+          <li>
+            <span class="read-list__title">
+              <% target = safe_url(book["url"], allow_site_path: false) %>
+              <% if target %>
+                <a href="<%= target %>" rel="noopener noreferrer"><%= book["title"] %></a>
+              <% else %>
+                <%= book["title"] %>
+              <% end %>
+            </span>
+            <% if book["author"].present? %><span class="muted"> · <%= book["author"] %></span><% end %>
+            <% if stars(book["rating"]) %>
+              <span class="read-list__stars" role="img" aria-label="<%= book['rating'] %> out of 5"><%= stars(book["rating"]) %></span>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </section>
+<% end %>
