@@ -39,7 +39,7 @@ jobs:
       # Where the site is served from: your github.io address now, your own
       # domain once you connect it in Settings -> Pages.
       - id: pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
 
       # Keeps the last good Goodreads / Drive data if a service is down.
       - uses: actions/cache@v4
