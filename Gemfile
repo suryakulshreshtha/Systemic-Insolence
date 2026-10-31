@@ -12,7 +12,7 @@ gem "puma", ">= 6.0"                 # local preview server only (bin/dev)
 gem "commonmarker", "~> 2.0"         # Markdown + syntax highlighting
 
 # --- Build-time data syncs (Goodreads, photo feed, Google Drive) -------------
-gem "faraday", "~> 2.9"
+gem "faraday", "~> 2.15"
 gem "faraday-retry"
 gem "feedjira", "~> 4.0"
 gem "nokogiri", ">= 1.18"
